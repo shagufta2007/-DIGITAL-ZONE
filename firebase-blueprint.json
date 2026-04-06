@@ -1,0 +1,96 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Digital service category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "icon": { "type": "string" },
+        "desc": { "type": "string" },
+        "category": { "type": "string" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "title", "icon", "desc"]
+    },
+    "Update": {
+      "title": "Update",
+      "description": "Job alert or news update",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "desc": { "type": "string" },
+        "link": { "type": "string" }
+      },
+      "required": ["title", "category", "date", "desc"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Customer review",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "text": { "type": "string" },
+        "rating": { "type": "integer" },
+        "image": { "type": "string" },
+        "approved": { "type": "boolean" }
+      },
+      "required": ["name", "text", "rating"]
+    },
+    "Contact": {
+      "title": "Contact",
+      "description": "Form submission from contact page",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "service": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "phone", "message"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/services/{serviceId}": {
+      "schema": "Service",
+      "description": "Available digital services"
+    },
+    "/updates/{updateId}": {
+      "schema": "Update",
+      "description": "Latest news and job alerts"
+    },
+    "/testimonials/{testimonialId}": {
+      "schema": "Testimonial",
+      "description": "Customer testimonials"
+    },
+    "/contacts/{contactId}": {
+      "schema": "Contact",
+      "description": "Contact form submissions"
+    }
+  }
+}
