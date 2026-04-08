@@ -66,7 +66,7 @@ export default function ChatBot() {
     } else if (lowerInput.includes("service") || lowerInput.includes("what you do")) {
       return "We provide 100+ services including Job Alerts, Identity Cards (Aadhar/PAN), Banking, and Govt Schemes. Which one are you interested in?";
     } else if (lowerInput.includes("contact") || lowerInput.includes("phone")) {
-      return "You can call us at +91 XXXXXXXXXX or visit our shop in the Main Market.";
+      return "You can call us at +91 7277565445 or visit our shop in the Main Market.";
     } else if (lowerInput.includes("pan") || lowerInput.includes("aadhar")) {
       return "We handle all Aadhar and PAN related services. Please bring your original documents to our shop for processing.";
     } else {

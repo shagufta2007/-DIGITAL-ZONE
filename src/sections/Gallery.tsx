@@ -2,12 +2,12 @@ import { motion } from "motion/react";
 import { Image as ImageIcon, ExternalLink } from "lucide-react";
 
 const galleryImages = [
-  { id: 1, title: "Physical Shop", category: "Location", image: "/PhysicalShop.jpg" },
-  { id: 2, title: "Customer Support", category: "Service", image: "/CustomerSupport.jpg" },
-  { id: 3, title: "Digital Seva", category: "CSC", image: "/DigitalSeva.jpg" },
+  { id: 1, title: "Physical Shop", category: "Location", image: "/img1.jpg" },
+  { id: 2, title: "Customer Support", category: "Service", image: "/img2.jpg" },
+  { id: 3, title: "Digital Seva", category: "CSC", image: "/img3.jpeg" },
   { id: 4, title: "Printing Lab", category: "Service", image: "/PrintingLab.jpg" },
   { id: 5, title: "Banking Point", category: "Service", image: "/BankingPoint.jpg" },
-  { id: 6, title: "Work Showcase", category: "Design", image: "/WorkShowcase.jpg" },
+  { id: 6, title: "Work Showcase", category: "Design", image: "/img6.jpg" },
 ];
 
 export default function Gallery() {

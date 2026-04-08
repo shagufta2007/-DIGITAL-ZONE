@@ -60,7 +60,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://wa.me/91XXXXXXXXXX"
+            href="https://wa.me/917277565445"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 transition-all"
@@ -103,14 +103,14 @@ export default function Navbar() {
             ))}
             <div className="flex gap-4 mt-2">
               <a
-                href="tel:+91XXXXXXXXXX"
+                href="tel:+917277565445"
                 className="flex-1 bg-slate-800 text-white py-3 rounded-xl flex items-center justify-center gap-2 font-semibold"
               >
                 <Phone size={18} />
                 Call
               </a>
               <a
-                href="https://wa.me/91XXXXXXXXXX"
+                href="https://wa.me/917277565445"
                 className="flex-1 bg-orange-500 text-white py-3 rounded-xl flex items-center justify-center gap-2 font-semibold"
               >
                 <MessageSquare size={18} />

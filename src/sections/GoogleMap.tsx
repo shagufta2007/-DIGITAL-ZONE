@@ -19,7 +19,7 @@ export default function GoogleMap() {
 
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-tight">
               Find Us in the <br />
-              <span className="text-sky-400">Heart of the City</span>
+              <span className="text-sky-400">Pathalgada chatra Jharkhand India</span>
             </h2>
 
             <p className="text-slate-400 text-lg mb-12 leading-relaxed">

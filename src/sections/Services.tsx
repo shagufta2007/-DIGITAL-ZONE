@@ -1,159 +1,242 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { 
-  GraduationCap, CreditCard, FileText, Landmark, 
-  Banknote, Scale, Monitor, Globe, Palette, 
-  Printer, Train, HardHat, ShoppingCart, Signal, 
-  ArrowRight, Sparkles, Zap, ShieldCheck, Users,
+import {
+  FileText,
+  ArrowRight,
+  Sparkles,
   Search
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "@/src/lib/firebase";
 
-const iconMap: { [key: string]: any } = {
-  GraduationCap, CreditCard, FileText, Landmark, 
-  Banknote, Scale, Monitor, Globe, Palette, 
-  Printer, Train, HardHat, ShoppingCart, Signal
+// ✅ TYPE
+type Service = {
+  id: string;
+  title?: string;
+  description?: string;
+  icon?: string;
 };
 
+// 🔥 FULL 114 SERVICES
+const allServices: string[] = [
+  // Jobs & Education
+  "All India Government Job Alerts",
+  "Jharkhand & Other State Govt Jobs",
+  "Railway | Bank | Police | Teaching",
+  "Defence | SSC | UPSC | Other Exams",
+  "Upcoming Vacancy Notifications",
+  "Daily / Weekly Current Affairs",
+  "Free Study Materials (PDF Notes, Practice Sets, VVI Content)",
+  "Exam Guidance | Strategy | Form-related Help",
+  "Resume / CV / Bio-Data Maker",
+  "Cover Letter & Application Format",
+  "Computer Courses (DCA, ADCA, CCC, Tally, DTP, Internet)",
+
+  // Identity
+  "Aadhaar Services",
+  "PAN Card",
+  "Voter ID Card",
+  "Ration Card",
+  "Ayushman Golden Card (PM-JAY)",
+  "ABHA Health Card",
+  "E-Shram / Labour Card",
+
+  // Certificates
+  "Caste Certificate",
+  "Income Certificate",
+  "Residence Certificate",
+  "EWS & OBC Certificate",
+  "Character Certificate",
+  "Non-Creamy Layer Certificate",
+  "Birth & Death Certificate",
+  "Marriage & Unmarried Certificate",
+  "Disability Certificate",
+  "Life Certificate (Jeevan Pramaan)",
+  "Vaccination & Religion Certificate",
+
+  // Schemes
+  "PM Kisan Samman Nidhi",
+  "PM Awas Yojana",
+  "Ujjwala Yojana",
+  "Pension Schemes",
+  "All Sarkari Yojana Apply & Status",
+  "Scholarship Forms",
+  "MGNREGA Job Card",
+  "KCC (Kisan Credit Card)",
+
+  // Banking
+  "Fino Payment Bank",
+  "Airtel Payment Bank",
+  "Account Opening (IPPB, Axis, Jio, PNB)",
+  "Cash Deposit & Withdrawal (AEPS)",
+  "Money Transfer",
+  "DBT / NPCI Linking",
+  "Online Payment & Receipts",
+  "ATM / Debit / Credit Card",
+  "Loan Services",
+  "Insurance",
+  "Cheque Deposit",
+
+  // Tax & Legal
+  "GST Registration & Return",
+  "Income Tax (ITR Filing)",
+  "Holding / Water / Road Tax",
+  "FSSAI License",
+  "Shop & Establishment License",
+  "Udyam Registration (MSME)",
+  "Land Record / Khatiyan",
+  "Mutation (Dakhil Kharij)",
+  "Rent Agreement & Affidavit",
+  "Lost FIR & E-Challan",
+
+  // CSC / Online
+  "Online Form Filling",
+  "Admit Card / Result Download",
+  "School / College Admission",
+  "DigiLocker & UMANG Setup",
+  "Hospital Appointment",
+  "Email Creation",
+  "CSC / AEPS / Kiosk ID",
+  "Cyber Cafe Services",
+
+  // Tech
+  "Mobile Assistance",
+  "Technical Problem Solving",
+  "Online Earning Guidance",
+  "Digital Skills Training",
+  "AI Tools Guidance",
+  "Laptop / Mobile Setup",
+  "Windows / MS Office Install",
+  "Mobile Reset / Software Install",
+  "Data Backup & Email Recovery",
+
+  // Design
+  "Poster Design",
+  "Visiting Card Design",
+  "Social Media Design",
+  "Logo & Branding",
+  "Instagram / Facebook Content",
+  "VIP Ads Design",
+
+  // Printing
+  "Printout (B/W & Color)",
+  "Photocopy / Lamination / Scan",
+  "Passport Photo",
+  "Signature Creation",
+  "PVC Card Printing",
+  "Data Entry",
+  "Excel & Letterhead",
+  "Project Binding",
+
+  // Printing Press
+  "Shaadi Card Printing",
+  "Pamphlet / Banner / Flex",
+  "School ID Card",
+  "Photo Frame Print",
+
+  // Travel
+  "Railway Ticket Booking",
+  "Flight / Bus / Hotel",
+  "Train Food Order",
+  "Electricity Bill",
+  "Mobile Recharge",
+  "Gas Booking",
+  "Fastag Services",
+
+  // PF
+  "EPFO / PF Services",
+  "PF Claim / KYC",
+  "UAN Activation",
+  "Passbook Print",
+
+  // Ecommerce
+  "Amazon / Flipkart Orders",
+  "Google Map Listing",
+  "WhatsApp Business Setup",
+  "Online Shop Promotion",
+  "YouTube / Instagram Setup",
+
+  // Telecom
+  "SIM Services",
+  "Driving License",
+  "Passport Apply",
+  "Health ID & Doctor Consultation",
+  "Digital Tips & Tricks"
+];
+
 export default function Services() {
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const q = query(collection(db, "services"), orderBy("createdAt", "desc"));
-    const unsub = onSnapshot(q, (snap) => {
-      setServices(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-      setLoading(false);
-    }, (err) => {
-      handleFirestoreError(err, OperationType.LIST, "services");
-      setLoading(false);
-    });
+
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        const data: Service[] = snap.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as Omit<Service, "id">),
+        }));
+
+        setServices(data);
+        setLoading(false);
+      },
+      (err) => {
+        handleFirestoreError(err, OperationType.LIST, "services");
+        setLoading(false);
+      }
+    );
 
     return () => unsub();
   }, []);
 
-  const filteredServices = services.filter((service) => 
-    service.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    service.description?.toLowerCase().includes(searchQuery.toLowerCase())
+  // 🔥 combine
+  const combinedServices: string[] = [
+    ...services.map((s) => s.title || ""),
+    ...allServices,
+  ];
+
+  // 🔍 filter
+  const filteredServices = combinedServices.filter((service) =>
+    service.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <section id="services" className="py-24 bg-slate-950 relative overflow-hidden">
+    <section className="py-24 bg-slate-950 min-h-screen">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-sm font-bold mb-6"
-          >
-            <Sparkles size={16} />
-            <span>Our Premium Services</span>
-          </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-            Comprehensive <span className="text-orange-500">Digital Solutions</span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-4xl font-bold text-white mb-6">
+            {combinedServices.length}+ Services
           </h2>
-          
-          <div className="relative max-w-md mx-auto mt-8">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+
+          <div className="relative max-w-md mx-auto">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="text"
               placeholder="Search services..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900/40 border border-slate-800 rounded-2xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all"
+              className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-12 pr-4 py-3 text-white"
             />
           </div>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {loading ? (
-            <div className="col-span-full text-center py-20">
-              <div className="w-12 h-12 border-4 border-orange-500/30 border-t-orange-500 rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-slate-400 font-bold tracking-widest uppercase text-xs">Loading services...</p>
-            </div>
-          ) : filteredServices.length > 0 ? (
-            filteredServices.map((service, idx) => {
-              const Icon = iconMap[service.icon] || FileText;
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  whileHover={{ y: -10 }}
-                  className="group p-8 rounded-[2rem] bg-slate-900/40 border border-slate-800 hover:border-orange-500/50 transition-all duration-300 relative overflow-hidden flex flex-col"
-                >
-                  <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowRight size={20} className="text-orange-500" />
-                  </div>
-
-                  <div className="w-16 h-16 rounded-2xl bg-orange-500/10 text-orange-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Icon size={32} />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors line-clamp-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
-                    {service.description}
-                  </p>
-
-                  <Link
-                    to={`/service/${service.id}`}
-                    className="text-sky-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:text-white transition-colors"
-                  >
-                    Explore More
-                    <ArrowRight size={14} />
-                  </Link>
-
-                  {/* Background Glow */}
-                  <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-orange-500/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </motion.div>
-              );
-            })
-          ) : (
-            <div className="col-span-full text-center py-20 bg-slate-900/20 rounded-[3rem] border border-dashed border-slate-800">
-              <Zap size={48} className="text-slate-700 mx-auto mb-4" />
-              <p className="text-slate-500 text-lg font-medium">No services found matching your criteria.</p>
-            </div>
-          )}
-        </div>
-
-        {/* Why Choose Us Highlight */}
-        <div className="mt-32 grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-          <div className="lg:col-span-1">
-            <h3 className="text-3xl font-bold text-white mb-6">Why Choose <br /> <span className="text-sky-400">Sultan Digital Zone?</span></h3>
-            <p className="text-slate-400 mb-8">We combine speed, trust, and professional expertise to deliver the best digital experience in the region.</p>
-            <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold transition-all">
-              Learn More About Us
-            </button>
-          </div>
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              { icon: Zap, title: "Super Fast Processing", desc: "We value your time. Most services are processed within minutes." },
-              { icon: ShieldCheck, title: "100% Secure & Trusted", desc: "Your data privacy and security are our top priorities." },
-              { icon: Users, title: "Expert Assistance", desc: "Get help from professionals who know the digital landscape." },
-              { icon: Sparkles, title: "Premium Quality", desc: "High-quality prints and professional design services." },
-            ].map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-orange-500">
-                  <item.icon size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-lg mb-1">{item.title}</h4>
-                  <p className="text-slate-500 text-sm">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {filteredServices.map((service, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="p-4 bg-slate-900 border border-slate-800 rounded-xl flex justify-between items-center hover:border-orange-500"
+            >
+              <span className="text-white text-sm">
+                {index + 1}. {service}
+              </span>
+              <ArrowRight size={14} className="text-orange-500" />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import Hero from "@/src/sections/Hero";
 import About from "@/src/sections/About";
-import Services from "@/src/sections/Services";
+
 import Contact from "@/src/sections/Contact";
 import Stats from "@/src/sections/Stats";
 import WhyChooseUs from "@/src/sections/WhyChooseUs";
@@ -36,7 +36,7 @@ export default function Home() {
       <Stats />
       <About />
       <WhyChooseUs />
-      <Services />
+      
       <Updates />
       <Testimonials />
       <Gallery />
@@ -48,7 +48,7 @@ export default function Home() {
 
       {/* Floating WhatsApp Button */}
       <motion.a
-        href="https://wa.me/91XXXXXXXXXX"
+        href="https://wa.me/917277565445"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0, opacity: 0 }}

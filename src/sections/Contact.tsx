@@ -66,9 +66,9 @@ export default function Contact() {
 
             <div className="space-y-8 mb-12">
               {[
-                { icon: Phone, title: "Call Us", value: "+91 XXXXXXXXXX", color: "text-orange-500", bg: "bg-orange-500/10" },
-                { icon: Mail, title: "Email Us", value: "contact@sultandigital.com", color: "text-sky-400", bg: "bg-sky-400/10" },
-                { icon: MapPin, title: "Visit Us", value: "Main Market, City, State, India", color: "text-emerald-400", bg: "bg-emerald-400/10" },
+                { icon: Phone, title: "Call Us", value: "+91 7277565445", color: "text-orange-500", bg: "bg-orange-500/10" },
+                { icon: Mail, title: "Email Us", value: "sultandigitalzone@gmail.com ", color: "text-sky-400", bg: "bg-sky-400/10" },
+                { icon: MapPin, title: "Visit Us", value: "Pathalgada chatra Jharkhand India", color: "text-emerald-400", bg: "bg-emerald-400/10" },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-6 group">
                   <div className={`w-16 h-16 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -124,7 +124,7 @@ export default function Contact() {
                   <input
                     {...register("phone")}
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all"
-                    placeholder="+91 XXXXXXXXXX"
+                    placeholder="+91 7277565445"
                   />
                   {errors.phone && <p className="text-red-500 text-xs">{errors.phone.message}</p>}
                 </div>

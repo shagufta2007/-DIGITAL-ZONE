@@ -2,12 +2,12 @@ import { motion } from "motion/react";
 import { Facebook, Instagram, Twitter, Linkedin, MessageSquare, Send } from "lucide-react";
 
 const socialLinks = [
-  { icon: Facebook, name: "Facebook", path: "#", color: "text-blue-500", bg: "bg-blue-500/10" },
-  { icon: Instagram, name: "Instagram", path: "#", color: "text-pink-500", bg: "bg-pink-500/10" },
-  { icon: Twitter, name: "Twitter", path: "#", color: "text-sky-400", bg: "bg-sky-400/10" },
-  { icon: Linkedin, name: "LinkedIn", path: "#", color: "text-blue-700", bg: "bg-blue-700/10" },
-  { icon: MessageSquare, name: "WhatsApp", path: "#", color: "text-green-500", bg: "bg-green-500/10" },
-  { icon: Send, name: "Telegram", path: "#", color: "text-sky-500", bg: "bg-sky-500/10" },
+  { icon: Facebook, name: "Facebook", path: "https://www.facebook.com/share/17jbyG1Sxx/", color: "text-blue-500", bg: "bg-blue-500/10" },
+  { icon: Instagram, name: "Instagram", path: " https://www.instagram.com/sultandigitalzone", color: "text-pink-500", bg: "bg-pink-500/10" },
+  { icon: Twitter, name: "Twitter", path: "https://www.threads.com/@sultandigitalzone", color: "text-sky-400", bg: "bg-sky-400/10" },
+  { icon: Linkedin, name: "LinkedIn", path: "https://linkedin.com/in/md-shahjad-9b6a88379", color: "text-blue-700", bg: "bg-blue-700/10" },
+  { icon: MessageSquare, name: "WhatsApp", path: "https://whatsapp.com/channel/0029VaB3AGz3GJP0r6MnTb2A", color: "text-green-500", bg: "bg-green-500/10" },
+  { icon: Send, name: "Telegram", path: " https://t.me/sultandigitalzone", color: "text-sky-500", bg: "bg-sky-500/10" },
 ];
 
 export default function SocialMedia() {
@@ -38,6 +38,7 @@ export default function SocialMedia() {
             <motion.a
               key={idx}
               href={social.path}
+              target="_blank"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

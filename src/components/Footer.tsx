@@ -32,10 +32,10 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, path: "#", color: "hover:text-blue-500" },
-  { icon: Instagram, path: "#", color: "hover:text-pink-500" },
-  { icon: Twitter, path: "#", color: "hover:text-sky-400" },
-  { icon: Linkedin, path: "#", color: "hover:text-blue-700" },
+  { icon: Facebook, path: "https://www.facebook.com/share/17jbyG1Sxx", color: "hover:text-blue-500" },
+  { icon: Instagram, path: "https://www.instagram.com/sultandigitalzone", color: "hover:text-pink-500" },
+  { icon: Twitter, path: "https://www.threads.com/@sultandigitalzone", color: "hover:text-sky-400" },
+  { icon: Linkedin, path: "https://linkedin.com/in/md-shahjad-9b6a88379", color: "hover:text-blue-700" },
 ];
 
 export default function Footer() {
@@ -79,8 +79,11 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       to={link.path}
-                      className="text-slate-400 hover:text-orange-500 transition-colors flex items-center gap-2 group"
+                     
+                      className="text-slate-400 hover:text-orange-500 transition-colors flex items-center gap-2 group "
+                   
                     >
+                      
                       <span className="w-1.5 h-1.5 rounded-full bg-slate-800 group-hover:bg-orange-500 transition-colors" />
                       {link.name}
                     </Link>
@@ -99,7 +102,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-slate-500 text-sm">Call Us</p>
-              <p className="text-white font-semibold">+91 XXXXXXXXXX</p>
+              <p className="text-white font-semibold">+91 7277565445</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -108,7 +111,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-slate-500 text-sm">Email Us</p>
-              <p className="text-white font-semibold">contact@sultandigital.com</p>
+              <p className="text-white font-semibold">sultandigitalzone@gmail.com </p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -117,7 +120,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-slate-500 text-sm">Visit Us</p>
-              <p className="text-white font-semibold">Main Market, City, State</p>
+              <p className="text-white font-semibold">Pathalgada chatra Jharkhand India</p>
             </div>
           </div>
         </div>
@@ -126,7 +129,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
           <p>© 2026 Sultan Digital Zone. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            Designed by <span className="text-orange-500 font-medium">Technical Sultan</span>
+            Designed by <span className="text-orange-500 font-medium">PSR Developer</span>
           </p>
         </div>
       </div>

@@ -1,8 +1,13 @@
+"use client";
+
 import { motion } from "motion/react";
 import { ArrowRight, MessageSquare, ShieldCheck, Zap, Users } from "lucide-react";
 import { cn } from "@/src/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-950">
       {/* Background Elements */}
@@ -14,6 +19,7 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -44,26 +50,39 @@ export default function Hero() {
               Empowering your digital journey with fast, trusted, and professional services. From government schemes to banking, we handle it all.
             </p>
 
+            {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/20 transition-all"
-              >
-                Contact Now
-                <ArrowRight size={20} />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all"
-              >
-                <MessageSquare size={20} />
-                WhatsApp
-              </motion.button>
+              
+              {/* Contact Button */}
+           <motion.button
+  onClick={() => navigate("/contact")}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/20 transition-all"
+>
+  Contact Now
+  <ArrowRight size={20} />
+</motion.button>
+
+              {/* WhatsApp Button */}
+            <motion.button
+  onClick={() =>
+    window.open(
+      "https://wa.me/917277565445?text=Hello%20I%20want%20to%20discuss%20a%20project",
+      "_blank"
+    )
+  }
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all"
+>
+  <MessageSquare size={20} />
+  WhatsApp
+</motion.button>
+
             </div>
 
-            {/* Stats/Trust Badges */}
+            {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-16 pt-10 border-t border-slate-900">
               <div className="flex flex-col">
                 <span className="text-3xl font-bold text-white">100+</span>
@@ -78,9 +97,10 @@ export default function Hero() {
                 <span className="text-slate-500 text-sm">Rating</span>
               </div>
             </div>
+
           </motion.div>
 
-          {/* Visual Element */}
+          {/* Right Side Cards */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -105,10 +125,10 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Decorative circles */}
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/20 blur-3xl rounded-full animate-pulse" />
             <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-sky-500/20 blur-3xl rounded-full animate-pulse delay-700" />
           </motion.div>
+
         </div>
       </div>
     </section>
