@@ -36,8 +36,8 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center font-bold text-white text-xl">
-            S
+          <div className="w-10 h-10  rounded-lg flex items-center justify-center font-bold text-white text-xl">
+           <img src="/logo1.png" alt="" />
           </div>
           <div className="flex flex-col">
             <span className="text-white font-bold text-lg leading-tight">SULTAN</span>

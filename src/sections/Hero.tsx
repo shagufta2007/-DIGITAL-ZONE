@@ -36,52 +36,54 @@ const navigate = useNavigate();
               <span>Digital ka smart solution, ek hi jagah!</span>
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
-              Welcome to <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
-                SULTAN
-              </span>{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-300">
-                DIGITAL ZONE
-              </span>
-            </h1>
+         <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
+  Your Trusted <br />
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
+    One-Stop Hub
+  </span>{" "}
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-300">
+    for All Digital Services
+  </span>
+</h1>
 
-            <p className="text-slate-400 text-lg md:text-xl mb-10 max-w-xl leading-relaxed">
-              Empowering your digital journey with fast, trusted, and professional services. From government schemes to banking, we handle it all.
-            </p>
+<p className="text-slate-400 text-lg md:text-xl mb-10 max-w-xl leading-relaxed">
+  PAN Card, Aadhaar, Banking aur sabhi Digital Services – ab ek hi jagah, fast aur reliable service ke saath.
+</p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+          
               
               {/* Contact Button */}
-           <motion.button
-  onClick={() => navigate("/contact")}
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/20 transition-all"
->
-  Contact Now
-  <ArrowRight size={20} />
-</motion.button>
+          <div className="flex flex-col sm:flex-row gap-4">
 
-              {/* WhatsApp Button */}
-            <motion.button
-  onClick={() =>
-    window.open(
-      "https://wa.me/917277565445?text=Hello%20I%20want%20to%20discuss%20a%20project",
-      "_blank"
-    )
-  }
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all"
->
-  <MessageSquare size={20} />
-  WhatsApp
-</motion.button>
+  {/* Primary Button - WhatsApp */}
+  <motion.button
+    onClick={() =>
+      window.open(
+        "https://wa.me/917277565445?text=Hello%20I%20want%20to%20discuss%20a%20project",
+        "_blank"
+      )
+    }
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/20 transition-all"
+  >
+    <MessageSquare size={20} />
+    Contact Now
+  </motion.button>
 
-            </div>
+  {/* Secondary Button - View Services */}
+  <motion.button
+    onClick={() => navigate("/services")}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all"
+  >
+    View Services
+    <ArrowRight size={20} />
+  </motion.button>
 
+</div>
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-16 pt-10 border-t border-slate-900">
               <div className="flex flex-col">

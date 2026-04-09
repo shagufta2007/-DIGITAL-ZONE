@@ -1,11 +1,24 @@
+"use client";
+
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, MessageSquare, Send, Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Send,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+} from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, handleFirestoreError, OperationType } from "@/src/lib/firebase";
 
+// ✅ Schema
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
@@ -26,13 +39,32 @@ export default function Contact() {
     resolver: zodResolver(contactSchema),
   });
 
+  // ✅ Submit Function (WhatsApp + Firebase)
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const path = "contacts";
-      await addDoc(collection(db, path), {
+      // 🔥 WhatsApp Message
+      const message = `Hello, I want to contact you:
+
+Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email}
+Service: ${data.service}
+
+Message: ${data.message}`;
+
+      const whatsappURL = `https://wa.me/917277565445?text=${encodeURIComponent(
+        message
+      )}`;
+
+      // ✅ Open WhatsApp
+      window.open(whatsappURL, "_blank");
+
+      // ✅ Save to Firebase
+      await addDoc(collection(db, "contacts"), {
         ...data,
         createdAt: serverTimestamp(),
       });
+
       alert("Message sent successfully!");
       reset();
     } catch (error) {
@@ -44,6 +76,7 @@ export default function Contact() {
     <section className="py-24 bg-slate-950 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+          
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -55,134 +88,106 @@ export default function Contact() {
               <span>Get in Touch</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Ready to Start Your <br />
               <span className="text-sky-400">Digital Journey?</span>
             </h2>
 
-            <p className="text-slate-400 text-lg mb-12 leading-relaxed">
-              Have a question or need a service? Reach out to us through any of the channels below or fill out the form. We're here to help!
+            <p className="text-slate-400 text-lg mb-12">
+              Have a question or need a service? Reach out to us or fill the form.
             </p>
 
             <div className="space-y-8 mb-12">
               {[
-                { icon: Phone, title: "Call Us", value: "+91 7277565445", color: "text-orange-500", bg: "bg-orange-500/10" },
-                { icon: Mail, title: "Email Us", value: "sultandigitalzone@gmail.com ", color: "text-sky-400", bg: "bg-sky-400/10" },
-                { icon: MapPin, title: "Visit Us", value: "Pathalgada chatra Jharkhand India", color: "text-emerald-400", bg: "bg-emerald-400/10" },
+                { icon: Phone, title: "Call Us", value: "+917277565445 / 916299080346" },
+                { icon: Mail, title: "Email Us", value: "sultandigitalzone@gmail.com" },
+                { icon: MapPin, title: "Visit Us", value: "Pathalgada Chatra Jharkhand India" },
               ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-6 group">
-                  <div className={`w-16 h-16 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <item.icon size={28} />
+                <div key={idx} className="flex items-center gap-6">
+                  <div className="w-14 h-14 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center">
+                    <item.icon size={24} />
                   </div>
                   <div>
-                    <p className="text-slate-500 text-sm font-medium uppercase tracking-widest">{item.title}</p>
-                    <p className="text-white text-xl font-bold">{item.value}</p>
+                    <p className="text-slate-400 text-sm">{item.title}</p>
+                    <p className="text-white font-bold">{item.value}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Social Links */}
+            {/* Social */}
             <div>
-              <p className="text-white font-bold mb-6 text-lg">Follow Us on Social Media</p>
+              <p className="text-white mb-4">Follow Us</p>
               <div className="flex gap-4">
                 {[Facebook, Instagram, Twitter, Linkedin].map((Icon, idx) => (
                   <a
                     key={idx}
                     href="#"
-                    className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-orange-500 hover:border-orange-500/50 transition-all duration-300"
+                    className="w-10 h-10 bg-slate-900 border border-slate-800 flex items-center justify-center rounded-lg text-slate-400 hover:text-orange-500"
                   >
-                    <Icon size={24} />
+                    <Icon size={20} />
                   </a>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-slate-900/40 backdrop-blur-xl border border-slate-800 p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative"
-          >
-            <h3 className="text-2xl font-bold text-white mb-8">Send us a Message</h3>
+          {/* Form */}
+          <motion.div className="bg-slate-900/40 border border-slate-800 p-8 rounded-3xl">
+            <h3 className="text-2xl text-white mb-6">Send Message</h3>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-slate-400 text-sm font-medium">Full Name</label>
-                  <input
-                    {...register("name")}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all"
-                    placeholder="John Doe"
-                  />
-                  {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}
-                </div>
-                <div className="space-y-2">
-                  <label className="text-slate-400 text-sm font-medium">Phone Number</label>
-                  <input
-                    {...register("phone")}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all"
-                    placeholder="+91 7277565445"
-                  />
-                  {errors.phone && <p className="text-red-500 text-xs">{errors.phone.message}</p>}
-                </div>
-              </div>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              
+              <input
+                {...register("name")}
+                placeholder="Full Name"
+                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-white"
+              />
+              {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
-              <div className="space-y-2">
-                <label className="text-slate-400 text-sm font-medium">Email Address</label>
-                <input
-                  {...register("email")}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all"
-                  placeholder="john@example.com"
-                />
-                {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
-              </div>
+              <input
+                {...register("phone")}
+                placeholder="Phone"
+                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-white"
+              />
+              {errors.phone && <p className="text-red-500">{errors.phone.message}</p>}
 
-              <div className="space-y-2">
-                <label className="text-slate-400 text-sm font-medium">Select Service</label>
-                <select
-                  {...register("service")}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all appearance-none"
-                >
-                  <option value="">Choose a service...</option>
-                  <option value="jobs">Jobs & Career</option>
-                  <option value="identity">Identity Services</option>
-                  <option value="govt">Govt Schemes</option>
-                  <option value="banking">Banking Services</option>
-                  <option value="other">Other</option>
-                </select>
-                {errors.service && <p className="text-red-500 text-xs">{errors.service.message}</p>}
-              </div>
+              <input
+                {...register("email")}
+                placeholder="Email"
+                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-white"
+              />
+              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
-              <div className="space-y-2">
-                <label className="text-slate-400 text-sm font-medium">Your Message</label>
-                <textarea
-                  {...register("message")}
-                  rows={4}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all resize-none"
-                  placeholder="How can we help you?"
-                />
-                {errors.message && <p className="text-red-500 text-xs">{errors.message.message}</p>}
-              </div>
+              <select
+                {...register("service")}
+                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-white"
+              >
+                <option value="">Select Service</option>
+                <option value="jobs">Jobs</option>
+                <option value="banking">Banking</option>
+                <option value="govt">Govt Scheme</option>
+              </select>
+
+              <textarea
+                {...register("message")}
+                placeholder="Message"
+                className="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-white"
+              />
+              {errors.message && <p className="text-red-500">{errors.message.message}</p>}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-slate-700 text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-orange-500/20"
+                className="w-full bg-orange-500 text-white py-3 rounded-lg flex justify-center items-center gap-2"
               >
-                {isSubmitting ? (
-                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <>
-                    Send Message
-                    <Send size={20} />
-                  </>
-                )}
+                {isSubmitting ? "Sending..." : "Send Message"}
+                <Send size={18} />
               </button>
+
             </form>
           </motion.div>
+
         </div>
       </div>
     </section>

@@ -41,7 +41,7 @@ export default function Testimonials() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            What Our <span className="text-sky-400">Clients Say</span>
+            What Our  <span className="text-sky-400">Customers Say</span>
           </h2>
           <p className="text-slate-400 text-lg leading-relaxed">
             Don't just take our word for it. Here's what our customers have to say about their experience with Sultan Digital Zone.

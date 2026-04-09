@@ -62,7 +62,7 @@ export default function WhyChooseUs() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            The Sultan <span className="text-sky-400">Digital Advantage</span>
+            Why People Trust  <span className="text-sky-400">Sultan Digital Zone?</span>
           </h2>
           <p className="text-slate-400 text-lg leading-relaxed">
             We combine speed, trust, and professional expertise to deliver the best digital experience in the region.

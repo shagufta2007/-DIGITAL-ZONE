@@ -208,9 +208,9 @@ export default function Services() {
       <div className="container mx-auto px-4">
 
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            {combinedServices.length}+ Services
-          </h2>
+         <h2 className="text-4xl font-bold text-white mb-6">
+  Our Digital Services
+</h2>
 
           <div className="relative max-w-md mx-auto">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />

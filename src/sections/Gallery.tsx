@@ -26,7 +26,7 @@ export default function Gallery() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            Visual <span className="text-sky-400">Gallery</span>
+            Visual <span className="text-sky-400">Our Work & Shop</span>
           </h2>
           <p className="text-slate-400 text-lg leading-relaxed">
             Take a look at our workspace and some of the services we've provided to our valued customers.

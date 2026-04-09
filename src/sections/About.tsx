@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { User, Shield, Award, MapPin, ExternalLink } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 export default function About() {
   return (
     <section className="py-24 bg-slate-950 relative overflow-hidden">
@@ -15,7 +15,7 @@ export default function About() {
           >
             <div className="relative z-10 rounded-[3rem] overflow-hidden border-4 border-slate-900 shadow-2xl aspect-[4/5] max-w-md mx-auto">
               <img
-                src="/MdShahjadTechnicalSultan.jpg"
+                src="/md.png"
                 alt="Md Shahjad - Technical Sultan"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"
@@ -53,14 +53,13 @@ export default function About() {
               <span>About the Founder</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-tight">
-              Meet the Visionary Behind <br />
-              <span className="text-sky-400">Sultan Digital Zone</span>
-            </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-tight">
+  Meet the Founder
+</h2>
 
-            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              With years of experience in technical consultancy and digital services, Md Shahjad (Technical Sultan) founded Sultan Digital Zone to bridge the digital divide. Our mission is to provide high-quality, accessible digital solutions to everyone.
-            </p>
+<p className="text-slate-400 text-lg mb-8 leading-relaxed">
+  Md Shahjad, also known as Technical Sultan, is a dedicated digital service professional from Chatra. He is committed to providing fast, reliable, and hassle-free digital solutions, with a mission to make every service simple, accessible, and trustworthy for all.
+</p>
 
             <div className="space-y-6 mb-10">
               {[
@@ -81,10 +80,11 @@ export default function About() {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-4 bg-sky-500 hover:bg-sky-600 text-white rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-sky-500/20">
-                View Work Showcase
-                <ExternalLink size={20} />
-              </button>
+            <button className="px-8 py-4 bg-sky-500 hover:bg-sky-600 text-white rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-sky-500/20"
+>
+  About the Founder
+  <ExternalLink size={20} />
+</button>
             </div>
           </motion.div>
         </div>
