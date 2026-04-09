@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageSquare, X, Send, User, Bot, Sparkles } from "lucide-react";
+import { X, Send } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 
 interface Message {
@@ -47,7 +47,6 @@ export default function ChatBot() {
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
 
-    // Simulate Bot Response
     setTimeout(() => {
       const botResponse: Message = {
         id: Date.now() + 1,
@@ -63,29 +62,29 @@ export default function ChatBot() {
     const lowerInput = input.toLowerCase();
     if (lowerInput.includes("hello") || lowerInput.includes("hi")) {
       return "Hi there! How can I assist you with our digital services?";
-    } else if (lowerInput.includes("service") || lowerInput.includes("what you do")) {
-      return "We provide 100+ services including Job Alerts, Identity Cards (Aadhar/PAN), Banking, and Govt Schemes. Which one are you interested in?";
-    } else if (lowerInput.includes("contact") || lowerInput.includes("phone")) {
-      return "You can call us at +91 7277565445 or visit our shop in the Main Market.";
-    } else if (lowerInput.includes("pan") || lowerInput.includes("aadhar")) {
-      return "We handle all Aadhar and PAN related services. Please bring your original documents to our shop for processing.";
+    } else if (lowerInput.includes("service")) {
+      return "We provide multiple digital services. What are you looking for?";
     } else {
-      return "That's interesting! For more detailed information, please contact Md Shahjad directly or visit our shop.";
+      return "Please contact us for more details.";
     }
   };
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Button (Image) */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-40 w-14 h-14 bg-sky-500 text-white rounded-full flex items-center justify-center shadow-2xl shadow-sky-500/30 hover:bg-sky-600 transition-all md:bottom-6 md:right-24"
+        className="fixed bottom-24 right-6 z-40 w-14 h-14 rounded-full shadow-2xl overflow-hidden md:bottom-6 md:right-24"
       >
-        <MessageSquare size={28} />
+        <img
+          src="chatbordicon.jpg"
+          alt="chat"
+          className="w-full h-full object-cover"
+        />
       </motion.button>
 
       {/* Chat Window */}
@@ -100,9 +99,13 @@ export default function ChatBot() {
             {/* Header */}
             <div className="p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-sky-500 flex items-center justify-center text-white">
-                  <Bot size={24} />
-                </div>
+                {/* Bot Image */}
+                <img
+                  src="/chatbordicon.jpg"
+                  alt="bot"
+                  className="w-10 h-10 rounded-xl object-cover"
+                />
+
                 <div>
                   <h4 className="text-white font-bold">Sultan AI Assistant</h4>
                   <div className="flex items-center gap-1">
@@ -111,6 +114,7 @@ export default function ChatBot() {
                   </div>
                 </div>
               </div>
+
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 text-slate-500 hover:text-white transition-colors"
@@ -119,36 +123,49 @@ export default function ChatBot() {
               </button>
             </div>
 
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-slate-800">
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={cn(
-                    "flex flex-col max-w-[80%]",
-                    msg.sender === "user" ? "ml-auto items-end" : "mr-auto items-start"
+                    "flex items-end gap-2 max-w-[85%]",
+                    msg.sender === "user"
+                      ? "ml-auto flex-row-reverse"
+                      : "mr-auto"
                   )}
                 >
-                  <div
-                    className={cn(
-                      "p-4 rounded-2xl text-sm leading-relaxed",
-                      msg.sender === "user"
-                        ? "bg-orange-500 text-white rounded-tr-none shadow-lg shadow-orange-500/20"
-                        : "bg-slate-800 text-slate-300 rounded-tl-none"
-                    )}
-                  >
-                    {msg.text}
+                  {/* Avatar Image */}
+                  <img
+                    src={msg.sender === "user" ? "/user.png" : "chatbordicon.jpg"}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+
+                  <div>
+                    <div
+                      className={cn(
+                        "p-4 rounded-2xl text-sm",
+                        msg.sender === "user"
+                          ? "bg-orange-500 text-white rounded-tr-none"
+                          : "bg-slate-800 text-slate-300 rounded-tl-none"
+                      )}
+                    >
+                      {msg.text}
+                    </div>
+
+                    <span className="text-[10px] text-slate-600 mt-1 block">
+                      {msg.timestamp.toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
                   </div>
-                  <span className="text-[10px] text-slate-600 mt-1 uppercase tracking-widest font-bold">
-                    {msg.sender === "user" ? "You" : "Sultan Bot"} •{" "}
-                    {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                  </span>
                 </div>
               ))}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Area */}
+            {/* Input */}
             <form
               onSubmit={handleSendMessage}
               className="p-4 bg-slate-950 border-t border-slate-800 flex gap-2"
@@ -158,12 +175,9 @@ export default function ChatBot() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-sky-500 transition-all"
+                className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-white"
               />
-              <button
-                type="submit"
-                className="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center hover:bg-sky-600 transition-all shadow-lg shadow-sky-500/20"
-              >
+              <button className="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center">
                 <Send size={20} />
               </button>
             </form>

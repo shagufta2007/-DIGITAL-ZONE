@@ -33,7 +33,7 @@ const navigate = useNavigate();
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-slate-800 text-sky-400 text-sm font-semibold mb-6"
             >
               <Zap size={16} className="fill-current" />
-              <span>Digital ka smart solution, ek hi jagah!</span>
+              <span>All Digital Services. One Place.</span>
             </motion.div>
 
          <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
