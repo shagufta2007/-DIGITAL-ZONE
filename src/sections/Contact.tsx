@@ -1,17 +1,21 @@
 "use client";
 
 import { motion } from "motion/react";
+
 import {
   Phone,
   Mail,
   MapPin,
   MessageSquare,
   Send,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
+
+ 
+ 
+ 
+  
 } from "lucide-react";
+ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { SiThreads } from "react-icons/si";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -116,20 +120,34 @@ Message: ${data.message}`;
             </div>
 
             {/* Social */}
-            <div>
-              <p className="text-white mb-4">Follow Us</p>
-              <div className="flex gap-4">
-                {[Facebook, Instagram, Twitter, Linkedin].map((Icon, idx) => (
-                  <a
-                    key={idx}
-                    href="#"
-                    className="w-10 h-10 bg-slate-900 border border-slate-800 flex items-center justify-center rounded-lg text-slate-400 hover:text-orange-500"
-                  >
-                    <Icon size={20} />
-                  </a>
-                ))}
-              </div>
-            </div>
+           {/* Social */}
+<div>
+  <p className="text-white mb-4">Follow Us</p>
+
+<div className="flex gap-4">
+
+  <a href="https://www.facebook.com/share/17jbyG1Sxx"
+     className="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-800 text-white hover:bg-orange-500 transition">
+    <FaFacebookF size={18} />
+  </a>
+
+  <a href="https://www.instagram.com/sultandigitalzone"
+     className="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-800 text-white hover:bg-orange-500 transition">
+    <FaInstagram size={18} />
+  </a>
+
+  <a href="https://www.threads.com/@sultandigitalzone"
+     className="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-800 text-white hover:bg-orange-500 transition">
+    <SiThreads size={18} />
+  </a>
+
+  <a href="https://linkedin.com/in/md-shahjad-9b6a88379"
+     className="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-800 text-white hover:bg-orange-500 transition">
+    <FaLinkedinIn size={18} />
+  </a>
+
+</div>
+</div>
           </motion.div>
 
           {/* Form */}
