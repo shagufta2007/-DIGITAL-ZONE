@@ -29,15 +29,15 @@ const footerLinks = [
   {
     title: "Support",
     links: [
-      { name: "Privacy Policy", path: "/privacy" },
-      { name: "Terms of Service", path: "/terms" },
-      { name: "FAQ", path: "/faq" },
-      { name: "Help Center", path: "/help" },
+      { name: "Privacy Policy", path: "/about" },
+      { name: "Terms of Service", path: "/services" },
+      { name: "Updates", path: "/updates" },
+      { name: "Help Center", path: "/contact" },
     ],
   },
 ];
 
-// ✅ FIXED social icons
+// ✅ Social links
 const socialLinks = [
   { icon: FaFacebook, path: "https://www.facebook.com/share/17jbyG1Sxx", color: "hover:text-blue-500" },
   { icon: FaInstagram, path: "https://www.instagram.com/sultandigitalzone", color: "hover:text-pink-500" },
@@ -110,9 +110,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-10 border-y border-slate-900 mb-10">
 
           <div className="flex items-center gap-4">
-            <div className="icon">
-              <Phone size={24} />
-            </div>
+            <Phone size={24} />
             <div>
               <p className="text-slate-500 text-sm">Call Us</p>
               <p className="text-white font-semibold">+91 7277565445</p>
@@ -120,9 +118,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="icon">
-              <Mail size={24} />
-            </div>
+            <Mail size={24} />
             <div>
               <p className="text-slate-500 text-sm">Email Us</p>
               <p className="text-white font-semibold">sultandigitalzone@gmail.com</p>
@@ -130,9 +126,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="icon">
-              <MapPin size={24} />
-            </div>
+            <MapPin size={24} />
             <div>
               <p className="text-slate-500 text-sm">Visit Us</p>
               <p className="text-white font-semibold">Jharkhand, India</p>
