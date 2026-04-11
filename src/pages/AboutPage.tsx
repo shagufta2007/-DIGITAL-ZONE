@@ -1,4 +1,5 @@
 import About from "@/src/sections/About";
+import ProfileSection from "../sections/ProfileSection";
 import WhyChooseUs from "@/src/sections/WhyChooseUs";
 import Stats from "@/src/sections/Stats";
 import { motion } from "motion/react";
@@ -45,6 +46,7 @@ export default function AboutPage() {
       </div>
 
       <About />
+      <ProfileSection/>
       <Stats />
       <WhyChooseUs />
     </main>
