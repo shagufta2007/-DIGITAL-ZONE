@@ -137,7 +137,7 @@ export default function ChatBot() {
                 >
                   {/* Avatar Image */}
                   <img
-                    src={msg.sender === "user" ? "/user.png" : "chatbordicon.jpg"}
+                    src={msg.sender === "user" ? "/chatbordicon.jpg" : "chatbordicon.jpg"}
                     className="w-8 h-8 rounded-full object-cover"
                   />
 
