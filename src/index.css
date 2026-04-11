@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-slate-950 text-slate-300;
+  }
+
+  ::selection {
+    @apply bg-orange-500 text-white;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+}

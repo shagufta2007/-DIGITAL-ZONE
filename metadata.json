@@ -1,0 +1,5 @@
+{
+  "name": "Sultan Digital Zone",
+  "description": "Digital ka smart solution, ek hi jagah! Premium digital services for jobs, identity, certificates, banking, and more.",
+  "requestFramePermissions": ["geolocation"]
+}
