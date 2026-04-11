@@ -5,8 +5,10 @@ import Home from "@/src/pages/Home";
 import ServicesPage from "@/src/pages/ServicesPage";
 import AboutPage from "@/src/pages/AboutPage";
 import UpdatesPage from "@/src/pages/UpdatesPage";
+
 import Blog from "./pages/Blog";
 import TypingTest from "./pages/TypingTest";
+
 import ContactPage from "@/src/pages/ContactPage";
 import ServiceDetails from "@/src/sections/ServiceDetails";
 import AdminLogin from "@/src/sections/AdminLogin";
@@ -32,9 +34,11 @@ export default function App() {
                 <Route path="/services/:id" element={<ServiceDetails />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/updates" element={<UpdatesPage />} />
+
                   <Route path="/blog" element={<Blog />} />
                   
         <Route path="/typing-test" element={<TypingTest />} />
+
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/admin" element={<AdminLogin />} />
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
